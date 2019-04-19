@@ -20,7 +20,7 @@ const gif = require("gif-search");
 
 const client = new Discord.Client({disableEveryone: true});
 
-const prefix = "$";
+const prefix = "3";
 /////////////////////////
 ////////////////////////
 
@@ -33,7 +33,7 @@ client.on('message', async msg =>{
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-    if(command === `_ping`) {
+    if(command === `ping`) {
     let embed = new Discord.RichEmbed()
     .setColor(3447003)
     .setTitle("Pong!!")
@@ -99,7 +99,7 @@ client.on('message', async msg => {
 	let command = msg.content.toLowerCase().split(" ")[0];
 	command = command.slice(prefix.length)
 
-	if (command === `p`) {
+	if (command === `play`) {
 		const voiceChannel = msg.member.voiceChannel;
         
         if (!voiceChannel) return msg.channel.send("I can't find you in any voice channel!");
@@ -179,7 +179,7 @@ client.on('message', async msg => {
             
         }
         
-	} else if (command === `s`) {
+	} else if (command === `skip`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to skip!!");
@@ -187,7 +187,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, skipped!');
         return undefined;
         
-	} else if (command === `sp`) {
+	} else if (command === `stop`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
         if (!serverQueue) return msg.channel.send("There is no Queue to stop!!");
@@ -196,7 +196,7 @@ client.on('message', async msg => {
 		serverQueue.connection.dispatcher.end('Ok, stopped & disconnected from your Voice channel');
         return undefined;
         
-	} else if (command === `volime`) {
+	} else if (command === `vol`) {
 
 		if (!msg.member.voiceChannel) return msg.channel.send("You Must be in a Voice channel to Run the Music commands!");
 		if (!serverQueue) return msg.channel.send('You only can use this command while music is playing!');
@@ -207,14 +207,14 @@ client.on('message', async msg => {
         
         return msg.channel.send(`Volume Now is **${args[1]}**`);
 
-	} else if (command === `np-`) {
+	} else if (command === `np`) {
 
 		if (!serverQueue) return msg.channel.send('There is no Queue!');
 		const embedNP = new Discord.RichEmbed()
 	    .setDescription(`Now playing **${serverQueue.songs[0].title}**`)
         return msg.channel.sendEmbed(embedNP);
         
-	} else if (command === `qu`) {
+	} else if (command === `queue`) {
 		
 		if (!serverQueue) return msg.channel.send('There is no Queue!!');
 		let index = 0;
@@ -226,14 +226,14 @@ client.on('message', async msg => {
 **Now playing :** **${serverQueue.songs[0].title}**`)
         .setColor("#f7abab")
 		return msg.channel.sendEmbed(embedqu);
-	} else if (command === `pause-`) {
+	} else if (command === `pause`) {
 		if (serverQueue && serverQueue.playing) {
 			serverQueue.playing = false;
 			serverQueue.connection.dispatcher.pause();
 			return msg.channel.send('Ok, paused');
 		}
 		return msg.channel.send('There is no Queue to Pause!');
-	} else if (command === "resume-") {
+	} else if (command === "resume") {
 
 		if (serverQueue && !serverQueue.playing) {
 			serverQueue.playing = true;
@@ -313,10 +313,10 @@ function play(guild, song) {
 
 
 client.on('message', message => {
-    if (message.content === 'h') {
+    if (message.content === 'help') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر الميوزك...**')
-        .setDescription('**برفكس البوت $**')
+        .setDescription('**برفكس البوت 3**')
         .addField('play', 'لتشغيل اغنية')
         .addField('join', 'دخول رومك الصوتي')
         .addField('disconnect', 'الخروج من رومك الصوتي')
@@ -333,16 +333,16 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-     if (message.content === "$h") {
-message.author.send("** [❖═════play═══════❖]**" + `  **
-❖ $play : لتشغيل اغنية
-❖ $join : دخول رومك الصوتي
-❖ $disconnect : مطور البوت
-❖ $skip : تخطي الأغنية
-❖ $pause : ايقاف الاغنية مؤقتا
-❖ $resume : تكملة الاغنية
-❖ $queue : اظهار قائمة التشغيل
-❖ $np : اظهار الاغنية اللي انت مشغلها حاليا
+     if (message.content === "3help") {
+message.author.send("** [❖═════3play═══════❖]**" + `  **
+❖ 3play : لتشغيل اغنية
+❖ 3join : دخول رومك الصوتي
+❖ 3disconnect : مطور البوت
+❖ 3skip : تخطي الأغنية
+❖ 3pause : ايقاف الاغنية مؤقتا
+❖ 3resume : تكملة الاغنية
+❖ 3queue : اظهار قائمة التشغيل
+❖ 3np : اظهار الاغنية اللي انت مشغلها حاليا
 **`);
     }
 });     
@@ -359,7 +359,7 @@ message.author.send("** [❖═════play═══════❖]**" + ` 
 
 
 client.on('message', message => {
-    if (message.content === 'ttto') {
+    if (message.content === 'general_commands') {
         let helpEmbed = new Discord.RichEmbed()
         .setTitle('**أوامر عامة...**')
         .addField('avatar', "افاتار الشخص المطلوب")
